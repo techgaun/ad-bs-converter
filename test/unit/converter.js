@@ -15,6 +15,10 @@ describe('#bs2ad', function() {
     it('Converts 2070/9/17 to 2014/1/1', function() {
         bs2ad('2070/9/17').should.equal('2014/1/1');
     });
+
+    it('Converts 2072/4/1 to 2015/7/17', function() {
+        bs2ad('2072/4/1').should.equal('2015/7/17');
+    });
 });
 
 describe('#ad2bs', function() {
@@ -28,6 +32,10 @@ describe('#ad2bs', function() {
 
     it('Converts 2015/7/19 to 2072/4/3', function() {
         ad2bs('2015/7/19').should.equal('2072/4/3');
+    });
+
+    it('Converts 2015/7/17 to 2072/4/1', function() {
+        ad2bs('2015/7/17').should.equal('2072/4/1');
     });
 });
 

@@ -1,0 +1,28 @@
+{
+  "name": "ad-bs-converter",
+  "version": "0.1.0",
+  "description": "A javascript implementation to convert bikram samvat to anno domini and vice-versa",
+  "main": "src/converter.js",
+  "scripts": {
+    "test": "mocha test --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techgaun/ad-bs-converter.git"
+  },
+  "keywords": [
+    "bikram samvat",
+    "nepali-to-english",
+    "english-to-nepali"
+  ],
+  "author": "techgaun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/techgaun/ad-bs-converter/issues"
+  },
+  "homepage": "https://github.com/techgaun/ad-bs-converter#readme",
+  "devDependencies": {
+    "chai": "^3.1.0",
+    "mocha": "^2.2.5"
+  }
+}
