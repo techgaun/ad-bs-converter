@@ -20,6 +20,14 @@ describe('#bs2ad', function() {
         bs2ad('2072/4/1').should.equal('2015/7/17');
     });
 
+    it('Converts 1970/4/1 to 1913/7/16', function() {
+        bs2ad('1978/1/1').should.equal('1921/4/13');
+    });
+
+    it('Converts 2092/12/30 to 2036/4/14', function() {
+        bs2ad('2092/12/30').should.equal('2036/4/14');
+    });
+
     //my birthday :D
     it('Converts 2047/4/26 to 1990/8/10', function() {
         bs2ad('2047/4/26').should.equal('1990/8/10');
@@ -41,6 +49,18 @@ describe('#ad2bs', function() {
 
     it('Converts 2015/7/17 to 2072/4/1', function() {
         ad2bs('2015/7/17').should.equal('2072/4/1');
+    });
+
+    it('Converts 2017/4/13 to 2073/12/31', function() {
+        ad2bs('2017/4/13').should.equal('2073/12/31');
+    });
+
+    it('Converts 2018/4/13 to 2074/12/30', function() {
+        ad2bs('2018/4/13').should.equal('2074/12/30');
+    });
+
+    it('Converts 2036/4/14 to 2092/12/30', function() {
+        ad2bs('2036/4/14').should.equal('2092/12/30');
     });
 
     //my birthday :D
