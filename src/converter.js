@@ -276,12 +276,12 @@ function offsetBSDays(dayData) {
         }
     }
     else {
-        dayCount = Math.abs(dayCount);
+        dayCount = Math.abs(dayCount) - 1;
         //dayCount = dayCount - bs_date.day;  // reduce 1
         bs_date.month--;
         while (dayCount >= 0) {
             if (dayCount < calendar_data[bs_date.year][bs_date.month - 1]) {
-                dayCount = calendar_data[bs_date.year][bs_date.month - 1] - dayCount + 1;
+                dayCount = calendar_data[bs_date.year][bs_date.month - 1] - dayCount;
                 break;
             }
             dayCount -= calendar_data[bs_date.year][bs_date.month - 1];
