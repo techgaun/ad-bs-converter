@@ -16,7 +16,33 @@ console.log(adbs.bs2ad("2047/4/26"))
 
 outputs
 
-```
-2047/4/26
-1990/8/10
+```javascript
+{ ne: 
+   { year: '२०७२',
+     month: '४',
+     day: '३१',
+     strMonth: 'श्रावण',
+     strShortMonth: 'श्रा',
+     dayOfWeek: '३',
+     strDayOfWeek: 'बुधवार',
+     strShortDayOfWeek: 'बुध',
+     strMinDayOfWeek: 'बु' },
+  en: 
+   { year: 2072,
+     month: 4,
+     day: 31,
+     strMonth: 'Shrawan',
+     strShortMonth: 'Shra',
+     dayOfWeek: 3,
+     strDayOfWeek: 'Budhabaar',
+     strShortDayOfWeek: 'Budha',
+     strMinDayOfWeek: 'Bu' } }
+{ year: 2015,
+  month: 8,
+  strMonth: 'August',
+  strShortMonth: 'Aug',
+  day: 17,
+  dayOfWeek: 1,
+  strDayOfWeek: 'Monday',
+  strShortDayOfWeek: 'Mon' }
 ```

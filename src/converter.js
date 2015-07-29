@@ -1,10 +1,10 @@
 "use strict";
 
 var defaults = {
-            lang: "ne",		//possible values: ne for nepali text, en for english text
-            //dateFormat: "yyyy/mm/dd",     // not implemented yet
-            monthFormat: "full",	//possible values: full for full name, short for short name
-            daysFormat: "min",		//possible values: full for full name, short for short name and min for minified name
+            lang: 'ne',		//possible values: ne for nepali text, en for english text
+            //dateFormat: 'yyyy/mm/dd',     // not implemented yet
+            monthFormat: 'full',	//possible values: full for full name, short for short name
+            daysFormat: 'min',		//possible values: full for full name, short for short name and min for minified name
     },
     ne = {
         monthsName: ['बैशाख', 'जेष्ठ', 'आषाढ', 'श्रावण', 'भाद्र', 'आश्विन', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फाल्गुन', 'चैत्र'],
@@ -20,6 +20,10 @@ var defaults = {
         daysShortName: ['Aaita', 'Som', 'Mangl', 'Budha', 'Bihi', 'Shukra', 'Shani'],
         daysMinName: ['Aai', 'So', 'Man', 'Bu', 'Bi', 'Shu', 'Sha'],
     },
+    engDaysName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    engDaysShortName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    engMonthsName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    engMonthsShortName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     daysInYear = 365,
     minMonth = 1,
     minDays = 1,
@@ -171,89 +175,27 @@ var defaults = {
  '2100': [ 31, 32, 31, 32, 30, 31, 30, 29, 30, 29, 30, 30, 365 ]
  */
 
-function getMonths() {
-    switch (_defaults.lang) {
-        case "en":
-            if (_defaults.monthFormat === "short") {
-                return en.monthsShortName;
-            }
-            else {
-                return en.monthsName;
-            }
-            break;	//not needed
-
-        default:
-            if (_defaults.monthFormat === "short") {
-                return ne.monthsShortName;
-            }
-            else {
-                return ne.monthsName;
-            }
-    }
+function convertNumberToNepali(num) {
+    var strNe = num.toString().split('').map(function(ch) {
+        return nums[Number(ch)];
+    });
+    return strNe.join('');
 }
-
-function getDays() {
-    switch (_defaults.daysFormat) {
-        case "full":
-            if (_defaults.lang === "en") {
-                return en.daysName;
-            }
-            else {
-                return ne.monthsName;
-            }
-            break;	//not needed
-
-        case "short":
-            if (_defaults.lang === "en") {
-                return en.daysShortName;
-            }
-            else {
-                return ne.daysShortName;
-            }
-            break;	//not needed
-
-        default:
-            if (_defaults.lang === "en") {
-                return en.daysMinName;
-            }
-            else {
-                return ne.daysMinName;
-            }
-    }
-}
-
-function getMonth() {
-    switch (_defaults.lang) {
-        case "en":
-            return en.monthsName[index];
-        //break;
-
-        default:
-            return ne.monthsName[index];
-    }
-}
-
 function countDaysInYear(year) {
     if (typeof calendar_data[year] === 'undefined') {
         return daysInYear;
     }
 
-    var daysCount = 0;
-    for (var i = minMonth; i <= 12; i++) {
-        daysCount += calendar_data[year][i];
-    }
-    return daysCount;
+    return calendar_data[year][12];
 }
 
 function isLeapYear(year) {
     return (daysInYear !== countDaysInYear(year));
 }
 
-
-
 function countBSDays(date) {
     var dayCount = 0;
-    var dateArr = date.split("/").map(function(str) {
+    var dateArr = date.split('/').map(function(str) {
         return Number(str);
     });
 
@@ -305,7 +247,7 @@ function countBSDays(date) {
 
 function countADDays(date) {
     var dayCount = 0, i = 0;
-    var dateArr = date.split("/").map(function(str) {
+    var dateArr = date.split('/').map(function(str) {
         return Number(str);
     });
 
@@ -315,10 +257,12 @@ function countADDays(date) {
     var date2 = new Date(dateObj.year, dateObj.month, dateObj.day);
     var timeDiff = date2.getTime() - date1.getTime();
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return diffDays;
+    return {diffDays: diffDays, dateInAd: date2};
 }
 
-function offsetBSDays(dayCount) {
+function offsetBSDays(dayData) {
+    var dayCount = dayData.diffDays,
+        dateInAd = dayData.dateInAd;
     var bs_date = JSON.parse(JSON.stringify(base_bs));
     if (dayCount >= 0) {
         bs_date.day += dayCount;
@@ -352,14 +296,52 @@ function offsetBSDays(dayCount) {
         }
         bs_date.day = dayCount;
     }
-    return (bs_date.year + '/' + bs_date.month + '/' + bs_date.day);
+    //return (bs_date.year + '/' + bs_date.month + '/' + bs_date.day);
+    var month = dateInAd.getMonth(),
+        dayOfWeek = dateInAd.getDay();
+    var dateObj = {
+        ne: {
+            year: convertNumberToNepali(bs_date.year),
+            month: convertNumberToNepali(bs_date.month),
+            day: convertNumberToNepali(bs_date.day),
+            strMonth: ne.monthsName[bs_date.month - 1],
+            strShortMonth: ne.monthsShortName[bs_date.month - 1],
+            dayOfWeek: convertNumberToNepali(dayOfWeek),
+            strDayOfWeek: ne.daysName[dayOfWeek],
+            strShortDayOfWeek: ne.daysShortName[dayOfWeek],
+            strMinDayOfWeek: ne.daysMinName[dayOfWeek]
+        },
+        en: {
+            year: bs_date.year,
+            month: bs_date.month,
+            day: bs_date.day,
+            strMonth: en.monthsName[bs_date.month - 1],
+            strShortMonth: en.monthsShortName[bs_date.month - 1],
+            dayOfWeek: dayOfWeek,
+            strDayOfWeek: en.daysName[dayOfWeek],
+            strShortDayOfWeek: en.daysShortName[dayOfWeek],
+            strMinDayOfWeek: en.daysMinName[dayOfWeek]
+        }
+    }
+    return dateObj;
 }
 
 function offsetADDays(dayCount) {
     var date = new Date(base_ad.year, base_ad.month - 1, base_ad.day);
     date.setDate(date.getDate() + dayCount);
-    var month = date.getMonth() + 1;
-    return (date.getFullYear() + '/' + month + '/' + date.getDate());
+    var month = date.getMonth(),
+        dayOfWeek = date.getDay();
+    var dateObj = {
+        year: date.getFullYear(),
+        month: month + 1,
+        strMonth: engMonthsName[month],
+        strShortMonth: engMonthsShortName[month],
+        day: date.getDate(),
+        dayOfWeek: dayOfWeek,
+        strDayOfWeek: engDaysName[dayOfWeek],
+        strShortDayOfWeek: engDaysShortName[dayOfWeek]
+    }
+    return dateObj;
 }
 
 function bs2ad(date) {
@@ -374,11 +356,6 @@ function arraySum(o) {
     for (var s = 0, i = o.length; i; s += o[--i]);
     return s;
 };
-
-//_defaults.lang = options.lang || _defaults.lang;
-//_defaults.monthFormat = options.monthFormat || _defaults.monthFormat;
-//_defaults.daysFormat = options.daysFormat || _defaults.daysFormat;
-//_defaults.dateFormat = options.dateFormat || _defaults.dateFormat;
 
 exports.bs2ad = bs2ad;
 exports.ad2bs = ad2bs;
