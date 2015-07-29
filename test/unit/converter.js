@@ -113,10 +113,10 @@ describe('#ad2bs', function() {
                 "day": "१६",
                 "strMonth": "श्रावण",
                 "strShortMonth": "श्रा",
-                "dayOfWeek": "२",
-                "strDayOfWeek": "मगलवार",
-                "strShortDayOfWeek": "मगल",
-                "strMinDayOfWeek": "म"
+                "dayOfWeek": "६",
+                "strDayOfWeek": "शनिवार",
+                "strShortDayOfWeek": "शनि",
+                "strMinDayOfWeek": "श"
             },
             "en": {
                 "year": 2072,
@@ -124,10 +124,10 @@ describe('#ad2bs', function() {
                 "day": 16,
                 "strMonth": "Shrawan",
                 "strShortMonth": "Shra",
-                "dayOfWeek": 2,
-                "strDayOfWeek": "Manglbaar",
-                "strShortDayOfWeek": "Mangl",
-                "strMinDayOfWeek": "Man"
+                "dayOfWeek": 6,
+                "strDayOfWeek": "Shanibaar",
+                "strShortDayOfWeek": "Shani",
+                "strMinDayOfWeek": "Sha"
             }
         };
         ad2bs('2015/8/1').should.eql(expectedDate);
@@ -141,10 +141,10 @@ describe('#ad2bs', function() {
                 "day": "१७",
                 "strMonth": "पौष",
                 "strShortMonth": "पौ",
-                "dayOfWeek": "६",
-                "strDayOfWeek": "शनिवार",
-                "strShortDayOfWeek": "शनि",
-                "strMinDayOfWeek": "श"
+                "dayOfWeek": "३",
+                "strDayOfWeek": "बुधवार",
+                "strShortDayOfWeek": "बुध",
+                "strMinDayOfWeek": "बु"
             },
             "en": {
                 "year": 2070,
@@ -152,10 +152,10 @@ describe('#ad2bs', function() {
                 "day": 17,
                 "strMonth": "Paush",
                 "strShortMonth": "Pau",
-                "dayOfWeek": 6,
-                "strDayOfWeek": "Shanibaar",
-                "strShortDayOfWeek": "Shani",
-                "strMinDayOfWeek": "Sha"
+                "dayOfWeek": 3,
+                "strDayOfWeek": "Budhabaar",
+                "strShortDayOfWeek": "Budha",
+                "strMinDayOfWeek": "Bu"
             }
         };
         ad2bs('2014/1/1').should.eql(expectedDate);
@@ -169,10 +169,10 @@ describe('#ad2bs', function() {
                 "day": "३",
                 "strMonth": "श्रावण",
                 "strShortMonth": "श्रा",
-                "dayOfWeek": "३",
-                "strDayOfWeek": "बुधवार",
-                "strShortDayOfWeek": "बुध",
-                "strMinDayOfWeek": "बु"
+                "dayOfWeek": "०",
+                "strDayOfWeek": "आइतवार",
+                "strShortDayOfWeek": "आइत",
+                "strMinDayOfWeek": "आ"
             },
             "en": {
                 "year": 2072,
@@ -180,10 +180,10 @@ describe('#ad2bs', function() {
                 "day": 3,
                 "strMonth": "Shrawan",
                 "strShortMonth": "Shra",
-                "dayOfWeek": 3,
-                "strDayOfWeek": "Budhabaar",
-                "strShortDayOfWeek": "Budha",
-                "strMinDayOfWeek": "Bu"
+                "dayOfWeek": 0,
+                "strDayOfWeek": "Aaitabaar",
+                "strShortDayOfWeek": "Aaita",
+                "strMinDayOfWeek": "Aai"
             }
         };
         ad2bs('2015/7/19').should.eql(expectedDate);
@@ -197,10 +197,10 @@ describe('#ad2bs', function() {
                 "day": "१",
                 "strMonth": "श्रावण",
                 "strShortMonth": "श्रा",
-                "dayOfWeek": "१",
-                "strDayOfWeek": "सोमवार",
-                "strShortDayOfWeek": "सोम",
-                "strMinDayOfWeek": "सो"
+                "dayOfWeek": "५",
+                "strDayOfWeek": "शुक्रवार",
+                "strShortDayOfWeek": "शुक्र",
+                "strMinDayOfWeek": "शु"
             },
             "en": {
                 "year": 2072,
@@ -208,10 +208,10 @@ describe('#ad2bs', function() {
                 "day": 1,
                 "strMonth": "Shrawan",
                 "strShortMonth": "Shra",
-                "dayOfWeek": 1,
-                "strDayOfWeek": "Sombaar",
-                "strShortDayOfWeek": "Som",
-                "strMinDayOfWeek": "So"
+                "dayOfWeek": 5,
+                "strDayOfWeek": "Shukrabaar",
+                "strShortDayOfWeek": "Shukra",
+                "strMinDayOfWeek": "Shu"
             }
         };
         ad2bs('2015/7/17').should.eql(expectedDate);
@@ -225,10 +225,10 @@ describe('#ad2bs', function() {
                 "day": "३१",
                 "strMonth": "चैत्र",
                 "strShortMonth": "चै",
-                "dayOfWeek": "६",
-                "strDayOfWeek": "शनिवार",
-                "strShortDayOfWeek": "शनि",
-                "strMinDayOfWeek": "श"
+                "dayOfWeek": "४",
+                "strDayOfWeek": "बिहिवार",
+                "strShortDayOfWeek": "बिहि",
+                "strMinDayOfWeek": "बि"
             },
             "en": {
                 "year": 2073,
@@ -236,10 +236,10 @@ describe('#ad2bs', function() {
                 "day": 31,
                 "strMonth": "Chaitra",
                 "strShortMonth": "Chai",
-                "dayOfWeek": 6,
-                "strDayOfWeek": "Shanibaar",
-                "strShortDayOfWeek": "Shani",
-                "strMinDayOfWeek": "Sha"
+                "dayOfWeek": 4,
+                "strDayOfWeek": "Bihibaar",
+                "strShortDayOfWeek": "Bihi",
+                "strMinDayOfWeek": "Bi"
             }
         };
         ad2bs('2017/4/13').should.eql(expectedDate);
@@ -253,10 +253,10 @@ describe('#ad2bs', function() {
                 "day": "३०",
                 "strMonth": "चैत्र",
                 "strShortMonth": "चै",
-                "dayOfWeek": "०",
-                "strDayOfWeek": "आइतवार",
-                "strShortDayOfWeek": "आइत",
-                "strMinDayOfWeek": "आ"
+                "dayOfWeek": "५",
+                "strDayOfWeek": "शुक्रवार",
+                "strShortDayOfWeek": "शुक्र",
+                "strMinDayOfWeek": "शु"
             },
             "en": {
                 "year": 2074,
@@ -264,10 +264,10 @@ describe('#ad2bs', function() {
                 "day": 30,
                 "strMonth": "Chaitra",
                 "strShortMonth": "Chai",
-                "dayOfWeek": 0,
-                "strDayOfWeek": "Aaitabaar",
-                "strShortDayOfWeek": "Aaita",
-                "strMinDayOfWeek": "Aai"
+                "dayOfWeek": 5,
+                "strDayOfWeek": "Shukrabaar",
+                "strShortDayOfWeek": "Shukra",
+                "strMinDayOfWeek": "Shu"
             }
         };
         ad2bs('2018/4/13').should.eql(expectedDate);
@@ -281,10 +281,10 @@ describe('#ad2bs', function() {
                 "day": "३०",
                 "strMonth": "चैत्र",
                 "strShortMonth": "चै",
-                "dayOfWeek": "३",
-                "strDayOfWeek": "बुधवार",
-                "strShortDayOfWeek": "बुध",
-                "strMinDayOfWeek": "बु"
+                "dayOfWeek": "१",
+                "strDayOfWeek": "सोमवार",
+                "strShortDayOfWeek": "सोम",
+                "strMinDayOfWeek": "सो"
             },
             "en": {
                 "year": 2092,
@@ -292,10 +292,10 @@ describe('#ad2bs', function() {
                 "day": 30,
                 "strMonth": "Chaitra",
                 "strShortMonth": "Chai",
-                "dayOfWeek": 3,
-                "strDayOfWeek": "Budhabaar",
-                "strShortDayOfWeek": "Budha",
-                "strMinDayOfWeek": "Bu"
+                "dayOfWeek": 1,
+                "strDayOfWeek": "Sombaar",
+                "strShortDayOfWeek": "Som",
+                "strMinDayOfWeek": "So"
             }
         };
         ad2bs('2036/4/14').should.eql(expectedDate);
@@ -310,10 +310,10 @@ describe('#ad2bs', function() {
                 "day": "२६",
                 "strMonth": "श्रावण",
                 "strShortMonth": "श्रा",
-                "dayOfWeek": "१",
-                "strDayOfWeek": "सोमवार",
-                "strShortDayOfWeek": "सोम",
-                "strMinDayOfWeek": "सो"
+                "dayOfWeek": "५",
+                "strDayOfWeek": "शुक्रवार",
+                "strShortDayOfWeek": "शुक्र",
+                "strMinDayOfWeek": "शु"
             },
             "en": {
                 "year": 2047,
@@ -321,10 +321,10 @@ describe('#ad2bs', function() {
                 "day": 26,
                 "strMonth": "Shrawan",
                 "strShortMonth": "Shra",
-                "dayOfWeek": 1,
-                "strDayOfWeek": "Sombaar",
-                "strShortDayOfWeek": "Som",
-                "strMinDayOfWeek": "So"
+                "dayOfWeek": 5,
+                "strDayOfWeek": "Shukrabaar",
+                "strShortDayOfWeek": "Shukra",
+                "strMinDayOfWeek": "Shu"
             }
         };
         ad2bs('1990/8/10').should.eql(expectedDate);

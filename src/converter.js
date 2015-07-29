@@ -251,9 +251,9 @@ function countADDays(date) {
         return Number(str);
     });
 
-    var dateObj = {year: dateArr[0], month: dateArr[1], day: dateArr[2]};
+    var dateObj = {year: dateArr[0], month: dateArr[1] - 1, day: dateArr[2]};
 
-    var date1 = new Date(base_ad.year, base_ad.month, base_ad.day);
+    var date1 = new Date(base_ad.year, base_ad.month - 1, base_ad.day);
     var date2 = new Date(dateObj.year, dateObj.month, dateObj.day);
     var timeDiff = date2.getTime() - date1.getTime();
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -266,9 +266,6 @@ function offsetBSDays(dayData) {
     var bs_date = JSON.parse(JSON.stringify(base_bs));
     if (dayCount >= 0) {
         bs_date.day += dayCount;
-        if (bs_date.day >  calendar_data[bs_date.year][bs_date.month - 1]) {
-            bs_date.day++;  // compensate for start value
-        }
         while (bs_date.day > calendar_data[bs_date.year][bs_date.month - 1]) {
             bs_date.day -= calendar_data[bs_date.year][bs_date.month - 1];
             bs_date.month++;
