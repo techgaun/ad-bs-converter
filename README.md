@@ -18,31 +18,31 @@ outputs
 
 ```javascript
 { ne: 
-   { year: '२०७२',
+   { year: '२०४७',
      month: '४',
-     day: '३१',
+     day: '२६',
      strMonth: 'श्रावण',
      strShortMonth: 'श्रा',
-     dayOfWeek: '३',
-     strDayOfWeek: 'बुधवार',
-     strShortDayOfWeek: 'बुध',
-     strMinDayOfWeek: 'बु' },
+     dayOfWeek: '५',
+     strDayOfWeek: 'शुक्रवार',
+     strShortDayOfWeek: 'शुक्र',
+     strMinDayOfWeek: 'शु' },
   en: 
-   { year: 2072,
+   { year: 2047,
      month: 4,
-     day: 31,
+     day: 26,
      strMonth: 'Shrawan',
      strShortMonth: 'Shra',
-     dayOfWeek: 3,
-     strDayOfWeek: 'Budhabaar',
-     strShortDayOfWeek: 'Budha',
-     strMinDayOfWeek: 'Bu' } }
-{ year: 2015,
+     dayOfWeek: 5,
+     strDayOfWeek: 'Shukrabaar',
+     strShortDayOfWeek: 'Shukra',
+     strMinDayOfWeek: 'Shu' } }
+{ year: 1990,
   month: 8,
   strMonth: 'August',
   strShortMonth: 'Aug',
-  day: 17,
-  dayOfWeek: 1,
-  strDayOfWeek: 'Monday',
-  strShortDayOfWeek: 'Mon' }
+  day: 10,
+  dayOfWeek: 5,
+  strDayOfWeek: 'Friday',
+  strShortDayOfWeek: 'Fri' }
 ```
