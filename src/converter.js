@@ -349,10 +349,5 @@ function ad2bs(date) {
     return offsetBSDays(countADDays(date));
 }
 
-function arraySum(o) {
-    for (var s = 0, i = o.length; i; s += o[--i]);
-    return s;
-};
-
 exports.bs2ad = bs2ad;
 exports.ad2bs = ad2bs;
