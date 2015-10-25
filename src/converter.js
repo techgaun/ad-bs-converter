@@ -1,5 +1,6 @@
 "use strict";
 
+var getNepaliNumber = require('get-nepali-number');
 var defaults = {
             lang: 'ne',		//possible values: ne for nepali text, en for english text
             //dateFormat: 'yyyy/mm/dd',     // not implemented yet
@@ -175,12 +176,6 @@ var defaults = {
  '2100': [ 31, 32, 31, 32, 30, 31, 30, 29, 30, 29, 30, 30, 365 ]
  */
 
-function convertNumberToNepali(num) {
-    var strNe = num.toString().split('').map(function(ch) {
-        return nums[Number(ch)];
-    });
-    return strNe.join('');
-}
 function countDaysInYear(year) {
     if (typeof calendar_data[year] === 'undefined') {
         return daysInYear;
@@ -298,12 +293,12 @@ function offsetBSDays(dayData) {
         dayOfWeek = dateInAd.getDay();
     var dateObj = {
         ne: {
-            year: convertNumberToNepali(bs_date.year),
-            month: convertNumberToNepali(bs_date.month),
-            day: convertNumberToNepali(bs_date.day),
+            year: getNepaliNumber(bs_date.year),
+            month: getNepaliNumber(bs_date.month),
+            day: getNepaliNumber(bs_date.day),
             strMonth: ne.monthsName[bs_date.month - 1],
             strShortMonth: ne.monthsShortName[bs_date.month - 1],
-            dayOfWeek: convertNumberToNepali(dayOfWeek),
+            dayOfWeek: getNepaliNumber(dayOfWeek),
             strDayOfWeek: ne.daysName[dayOfWeek],
             strShortDayOfWeek: ne.daysShortName[dayOfWeek],
             strMinDayOfWeek: ne.daysMinName[dayOfWeek]

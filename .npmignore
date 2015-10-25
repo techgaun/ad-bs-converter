@@ -5,3 +5,4 @@ npm-debug.log
 *.xml
 .idea
 gulpfile.js
+.editorconfig
