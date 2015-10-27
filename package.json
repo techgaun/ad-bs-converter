@@ -1,6 +1,6 @@
 {
   "name": "ad-bs-converter",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A javascript implementation to convert bikram samvat to anno domini and vice-versa",
   "main": "src/converter.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
-    "get-nepali-number": "^0.1.0"
+    "get-nepali-number": "^0.1.0",
+    "get-nepday-of-week": "^0.1.4"
   }
 }

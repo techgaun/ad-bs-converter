@@ -1,6 +1,7 @@
 "use strict";
 
 var getNepaliNumber = require('get-nepali-number');
+var getNepDayOfWeek = require('get-nepday-of-week');
 var defaults = {
             lang: 'ne',		//possible values: ne for nepali text, en for english text
             //dateFormat: 'yyyy/mm/dd',     // not implemented yet
@@ -10,16 +11,10 @@ var defaults = {
     ne = {
         monthsName: ['बैशाख', 'जेष्ठ', 'आषाढ', 'श्रावण', 'भाद्र', 'आश्विन', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फाल्गुन', 'चैत्र'],
         monthsShortName: ['बै', 'जे', 'आषा', 'श्रा', 'भा', 'आश', 'का', 'मं', 'पौ', 'मा', 'फा', 'चै'],
-        daysName: ['आइतवार', 'सोमवार', 'मगलवार', 'बुधवार', 'बिहिवार', 'शुक्रवार', 'शनिवार'],
-        daysShortName: ['आइत', 'सोम', 'मगल', 'बुध', 'बिहि', 'शुक्र', 'शनि'],
-        daysMinName: ['आ', 'सो', 'म', 'बु', 'बि', 'शु', 'श']
     },
     en = {
         monthsName: ['Baisakh', 'Jestha', 'Ashadh', 'Shrawan', 'Bhadra', 'Ashwin', 'Kartik', 'Mangsir', 'Paush', 'Mangh', 'Falgun', 'Chaitra'],
         monthsShortName: ['Bai', 'Je', 'As', 'Shra', 'Bha', 'Ash', 'Kar', 'Mang', 'Pau', 'Ma', 'Fal', 'Chai'],
-        daysName: ['Aaitabaar', 'Sombaar', 'Manglbaar', 'Budhabaar', 'Bihibaar', 'Shukrabaar', 'Shanibaar'],
-        daysShortName: ['Aaita', 'Som', 'Mangl', 'Budha', 'Bihi', 'Shukra', 'Shani'],
-        daysMinName: ['Aai', 'So', 'Man', 'Bu', 'Bi', 'Shu', 'Sha'],
     },
     engDaysName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     engDaysShortName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -291,6 +286,8 @@ function offsetBSDays(dayData) {
     //return (bs_date.year + '/' + bs_date.month + '/' + bs_date.day);
     var month = dateInAd.getMonth(),
         dayOfWeek = dateInAd.getDay();
+    var npDayOfWeek = getNepDayOfWeek(dayOfWeek),
+        enDayOfWeek = getNepDayOfWeek(dayOfWeek, {'lang': 'en'});
     var dateObj = {
         ne: {
             year: getNepaliNumber(bs_date.year),
@@ -299,9 +296,9 @@ function offsetBSDays(dayData) {
             strMonth: ne.monthsName[bs_date.month - 1],
             strShortMonth: ne.monthsShortName[bs_date.month - 1],
             dayOfWeek: getNepaliNumber(dayOfWeek),
-            strDayOfWeek: ne.daysName[dayOfWeek],
-            strShortDayOfWeek: ne.daysShortName[dayOfWeek],
-            strMinDayOfWeek: ne.daysMinName[dayOfWeek]
+            strDayOfWeek: npDayOfWeek['full'],
+            strShortDayOfWeek: npDayOfWeek['short'],
+            strMinDayOfWeek: npDayOfWeek['min']
         },
         en: {
             year: bs_date.year,
@@ -310,9 +307,9 @@ function offsetBSDays(dayData) {
             strMonth: en.monthsName[bs_date.month - 1],
             strShortMonth: en.monthsShortName[bs_date.month - 1],
             dayOfWeek: dayOfWeek,
-            strDayOfWeek: en.daysName[dayOfWeek],
-            strShortDayOfWeek: en.daysShortName[dayOfWeek],
-            strMinDayOfWeek: en.daysMinName[dayOfWeek]
+            strDayOfWeek: enDayOfWeek['full'],
+            strShortDayOfWeek: enDayOfWeek['short'],
+            strMinDayOfWeek: enDayOfWeek['min']
         }
     }
     return dateObj;
