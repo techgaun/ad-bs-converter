@@ -1,7 +1,7 @@
 # ad-bs-converter [![npm version](https://badge.fury.io/js/ad-bs-converter.svg)](http://badge.fury.io/js/ad-bs-converter) [![Build Status](https://travis-ci.org/techgaun/ad-bs-converter.svg?branch=master)](https://travis-ci.org/techgaun/ad-bs-converter)
 A javascript implementation to convert bikram samvat to anno domini and vice-versa
 
-_If you are looking for ad-bs converter for python, check out [ad-bs-converter.py](https://github.com/techgaun/ad-bs-converter)._
+_If you are looking for ad-bs converter for python, check out [ad-bs-converter.py](https://github.com/techgaun/ad-bs-converter.py)._
 
 ### Installation
 ```bash
