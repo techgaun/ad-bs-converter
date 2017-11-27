@@ -1,6 +1,6 @@
 {
   "name": "ad-bs-converter",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "A javascript implementation to convert bikram samvat to anno domini and vice-versa",
   "main": "src/converter.js",
   "scripts": {
