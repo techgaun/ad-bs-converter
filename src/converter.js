@@ -285,6 +285,8 @@ function offsetBSDays(dayData) {
     dayOfWeek = dateInAd.getDay();
   var npDayOfWeek = getNepDayOfWeek(dayOfWeek),
     enDayOfWeek = getNepDayOfWeek(dayOfWeek, {'lang': 'en'});
+
+  var totalDays = calendar_data[bs_date.year][bs_date.month - 1]
   var dateObj = {
     ne: {
       year: getNepaliNumber(bs_date.year),
@@ -295,7 +297,8 @@ function offsetBSDays(dayData) {
       dayOfWeek: getNepaliNumber(dayOfWeek),
       strDayOfWeek: npDayOfWeek['full'],
       strShortDayOfWeek: npDayOfWeek['short'],
-      strMinDayOfWeek: npDayOfWeek['min']
+      strMinDayOfWeek: npDayOfWeek['min'],
+      totalDaysInMonth: getNepaliNumber(totalDays)
     },
     en: {
       year: bs_date.year,
@@ -306,7 +309,8 @@ function offsetBSDays(dayData) {
       dayOfWeek: dayOfWeek,
       strDayOfWeek: enDayOfWeek['full'],
       strShortDayOfWeek: enDayOfWeek['short'],
-      strMinDayOfWeek: enDayOfWeek['min']
+      strMinDayOfWeek: enDayOfWeek['min'],
+      totalDaysInMonth: totalDays
     }
   }
   return dateObj;
