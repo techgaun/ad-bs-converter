@@ -28,7 +28,8 @@ outputs
      dayOfWeek: '५',
      strDayOfWeek: 'शुक्रवार',
      strShortDayOfWeek: 'शुक्र',
-     strMinDayOfWeek: 'शु' },
+     strMinDayOfWeek: 'शु',
+     totalDaysInMonth: '३२'},
   en: 
    { year: 2047,
      month: 4,
@@ -38,7 +39,8 @@ outputs
      dayOfWeek: 5,
      strDayOfWeek: 'Shukrabaar',
      strShortDayOfWeek: 'Shukra',
-     strMinDayOfWeek: 'Shu' } }
+     strMinDayOfWeek: 'Shu',
+     totalDaysInMonth: '32' } }
 { year: 1990,
   month: 8,
   strMonth: 'August',
