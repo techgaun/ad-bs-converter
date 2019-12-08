@@ -335,10 +335,13 @@ function offsetADDays(dayCount) {
 }
 
 function bs2ad(date) {
+  // Accepts Date format "2018-04-09"
+  date = date?date.replace(/-/g,"/"):null
   return offsetADDays(countBSDays(date));
 }
 
 function ad2bs(date) {
+  date = date?date.replace(/-/g,"/"):null
   return offsetBSDays(countADDays(date));
 }
 
