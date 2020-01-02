@@ -102,6 +102,20 @@ describe('#bs2ad', function() {
         };
         bs2ad('2047/4/26').should.eql(expectedDate);
     });
+
+    it('Converts 2076/09/16 to 2020/01/01', function() {
+        var expectedDate = {
+            "year": 2020,
+            "month": 1,
+            "strMonth": "January",
+            "strShortMonth": "Jan",
+            "day": 1,
+            "dayOfWeek": 3,
+            "strDayOfWeek": "Wednesday",
+            "strShortDayOfWeek": "Wed"
+        };
+        bs2ad('2076/09/16').should.eql(expectedDate);
+    });
 });
 
 describe('#ad2bs', function() {
