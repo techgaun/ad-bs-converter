@@ -313,6 +313,9 @@ function offsetBSDays(dayData) {
       totalDaysInMonth: totalDays
     }
   }
+  dateObj.toDateString = function toDateString(){
+    return bs_date.year + "/" + bs_date.month + "/" + bs_date.day
+  }
   return dateObj;
 }
 
@@ -331,14 +334,20 @@ function offsetADDays(dayCount) {
     strDayOfWeek: engDaysName[dayOfWeek],
     strShortDayOfWeek: engDaysShortName[dayOfWeek]
   }
+  dateObj.toDateString = function toDateString(){
+    return date.getFullYear() + "/" + (month + 1) + "/" + date.getDate();
+  };
   return dateObj;
 }
 
 function bs2ad(date) {
+  // Accepts Date format "2018-04-09"
+  date = date?date.replace(/-/g,"/"):null
   return offsetADDays(countBSDays(date));
 }
 
 function ad2bs(date) {
+  date = date?date.replace(/-/g,"/"):null
   return offsetBSDays(countADDays(date));
 }
 
