@@ -51,12 +51,14 @@ adheres to [Semantic Versioning](https://semver.org/).
   (previously the behaviour was undefined: wrong results or a `TypeError`).
 - Test suite migrated to vitest, with a round-trip test over every day in the table and a
   cross-check of every day in 2000 - 2090 BS against `nepali-date-converter`.
-- GitHub Actions CI (Node 18 / 20 / 22) replacing Travis; ESLint and Prettier.
+- GitHub Actions CI (Node 22 / 24 / 26) replacing Travis; ESLint and Prettier. A `.nvmrc`
+  pins local development to Node 26.
 
 ### Changed
 
 - Calendar data for BS 2101 - 2199 (already on `master`, never published to npm) is included.
-- `engines.node` is now `>=18`.
+- `engines.node` is now `>=22` (Node 18 and 20 are end-of-life). The build targets Node 22 /
+  ES2022.
 
 ### Notes
 

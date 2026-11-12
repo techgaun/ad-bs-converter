@@ -2,8 +2,9 @@
 
 Convert Bikram Sambat (BS, the Nepali calendar) dates to Anno Domini (AD, Gregorian) and vice-versa.
 
-Written in TypeScript, published as both ESM and CommonJS with bundled type declarations. Works on
-Node 18+ and in any modern browser bundler.
+Written in TypeScript, published as both ESM and CommonJS with bundled type declarations. Requires
+Node 22 or newer (CI runs on Node 22, 24 and 26; `.nvmrc` points at 26) and works in any modern
+browser bundler.
 
 _If you are looking for an ad-bs converter for Python, check out [ad-bs-converter.py](https://github.com/techgaun/ad-bs-converter.py)._
 
