@@ -1,6 +1,6 @@
 {
   "name": "ad-bs-converter",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Convert Bikram Sambat (BS) dates to Anno Domini (AD) and vice-versa. TypeScript, ESM and CommonJS.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
