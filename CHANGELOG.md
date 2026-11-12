@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project
 adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.7.0] - 2026-11-12
+
+### Changed
+
+- Updated to the TypeScript releases of the runtime dependencies: `get-nepali-number` `^0.3.0`
+  and `get-nepday-of-week` `^1.0.0`. Both now ship their own type definitions, so the ambient
+  `deps.d.ts` shim is gone. Numeric output is unchanged: Devanagari fields are requested with
+  `{ grouping: false }`, so `ne.year` is still `२०८३` and never `२,०८३`.
+- **Weekday spelling.** `ne.strDayOfWeek` now follows `get-nepday-of-week` 1.0 and uses the
+  `-बार` form (`आइतबार`, `सोमबार`, `मङ्गलबार`, `बुधबार`, `बिहिबार`, `शुक्रबार`, `शनिबार`) instead of
+  `-वार`. Short and minimal forms are unaffected. Pin `0.6.x` if you depend on the old spelling.
+
+
 ## [0.6.0] - 2026-11-11
 
 ### Fixed

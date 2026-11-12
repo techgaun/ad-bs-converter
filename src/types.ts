@@ -32,7 +32,7 @@ export interface BsDateFields<T extends string | number> {
   strShortMonth: string;
   /** Day of week, `0` for Sunday through `6` for Saturday. */
   dayOfWeek: T;
-  /** Full weekday name, e.g. `"शनिवार"` / `"Shanibaar"`. */
+  /** Full weekday name, e.g. `"शनिबार"` / `"Shanibaar"`. */
   strDayOfWeek: string;
   /** Short weekday name, e.g. `"शनि"` / `"Shani"`. */
   strShortDayOfWeek: string;

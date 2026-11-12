@@ -40,7 +40,7 @@ outputs
     strMonth: 'श्रावण',
     strShortMonth: 'श्रा',
     dayOfWeek: '५',
-    strDayOfWeek: 'शुक्रवार',
+    strDayOfWeek: 'शुक्रबार',
     strShortDayOfWeek: 'शुक्र',
     strMinDayOfWeek: 'शु',
     totalDaysInMonth: '३२'
