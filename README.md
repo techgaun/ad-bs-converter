@@ -118,12 +118,13 @@ Panchanga Nirnayak Samiti year by year. This library therefore ships a lookup ta
 
 - **1978 - 2090 BS**: considered reliable. Every day in 2000 - 2090 BS is cross-checked in CI
   against the independent [`nepali-date-converter`](https://www.npmjs.com/package/nepali-date-converter)
-  table. The two tables differ in exactly three years (2004, 2062 and 2087), each time by which of
-  two adjacent months gets one extra day; those are listed in
-  [`test/crosscheck.test.ts`](test/crosscheck.test.ts) and have been left as they were.
+  table with no disagreements (see [`test/crosscheck.test.ts`](test/crosscheck.test.ts)).
 - **2082 and 2083 BS** were corrected in v0.6.0; earlier releases carried provisional 2017-era
   predictions that were off by a day in the second half of those years (see the
   [changelog](CHANGELOG.md)).
+- **2004, 2062 and 2087 BS**: PR #11 (2024, never published to npm) fixed 2081 but also rewrote
+  these three rows to values that match no reference library. v0.6.0 restores the original rows,
+  which agree with both `nepali-date-converter` and `@remotemerge/nepali-date-converter`.
 - **2091 BS and later** are provisional. No official data exists yet and different sources disagree;
   the rows are kept so conversions keep working but they may change in a future release.
 

@@ -6,11 +6,15 @@
  * that year.
  *
  * Data provenance:
- * - 1975-2092: original table shipped with this package. Years 2082 and 2083
- *   were corrected in 0.6.0 (they were provisional predictions when first
- *   added in 2017).
+ * - 1975-2092: original table shipped with this package (npm 0.5.0).
+ *   - 2082 and 2083 were corrected in 0.6.0: they were provisional
+ *     predictions when first added in 2017.
+ *   - 2081 was corrected by PR #11 (2024). The same PR also rewrote 2004,
+ *     2062 and 2087 to values that match no reference library; 0.6.0
+ *     restores the 0.5.0 rows, which agree with nepali-date-converter and
+ *     @remotemerge/nepali-date-converter.
  * - 2093-2100: https://nepalipatro.com.np/calendar/monthly/bs/2093/1
- * - 2101-2199: community contribution (see git history).
+ * - 2101-2199: community contribution (PR #11, see git history).
  *
  * Years after 2090 BS have not been officially published by the Nepal
  * Panchanga Nirnayak Samiti and are therefore provisional; they may change.
@@ -67,7 +71,7 @@ export const CALENDAR_DATA: Readonly<Record<number, YearData>> = {
   2001: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2002: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2003: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
-  2004: [30, 32, 31, 32, 31, 30, 30, 30, 30, 29, 29, 31, 365],
+  2004: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31, 365],
   2005: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2006: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2007: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
@@ -125,7 +129,7 @@ export const CALENDAR_DATA: Readonly<Record<number, YearData>> = {
   2059: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2060: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2061: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
-  2062: [31, 31, 31, 32, 31, 31, 29, 30, 29, 30, 29, 31, 365],
+  2062: [30, 32, 31, 32, 31, 31, 29, 30, 29, 30, 29, 31, 365],
   2063: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2064: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2065: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
@@ -150,7 +154,7 @@ export const CALENDAR_DATA: Readonly<Record<number, YearData>> = {
   2084: [31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30, 365],
   2085: [31, 32, 31, 32, 30, 31, 30, 30, 29, 30, 30, 30, 366],
   2086: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30, 365],
-  2087: [31, 31, 32, 31, 31, 31, 30, 29, 30, 30, 30, 30, 366],
+  2087: [31, 31, 32, 31, 31, 31, 30, 30, 29, 30, 30, 30, 366],
   2088: [30, 31, 32, 32, 30, 31, 30, 30, 29, 30, 30, 30, 365],
   2089: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30, 365],
   2090: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30, 365],

@@ -20,20 +20,14 @@ const MS_PER_DAY = 86_400_000;
  * accepted: `known disagreements are still real` below fails as soon as one of
  * them is resolved, so the entry has to be removed deliberately.
  *
- * In each case the two tables place a single day in a different one of two
- * adjacent months; the yearly totals agree, so dates outside the affected
- * window are unaffected. No authoritative source was available to settle them
- * when the cross-check was added, so the historic rows are kept unchanged.
+ * Currently empty: as of 0.6.0 every day of 2000 - 2090 BS agrees. (The
+ * three years PR #11 had regressed, 2004, 2062 and 2087, were restored to
+ * their 0.5.0 rows, which match nepali-date-converter and
+ * @remotemerge/nepali-date-converter.)
  *
- * - 2004 BS: Paush/Magh 30/29 here vs 29/30 in nepali-date-converter.
- * - 2062 BS: Baisakh/Jestha 31/31 here vs 30/32 in nepali-date-converter.
- * - 2087 BS: Mangsir/Paush 29/30 here vs 30/29 in nepali-date-converter.
+ * Entry format: `{ [bsYear]: 'what differs and why it is kept' }`.
  */
-const KNOWN_DISAGREEMENTS: Readonly<Record<number, string>> = {
-  2004: 'Paush/Magh 2004: 30/29 here vs 29/30 in nepali-date-converter',
-  2062: 'Baisakh/Jestha 2062: 31/31 here vs 30/32 in nepali-date-converter',
-  2087: 'Mangsir/Paush 2087: 29/30 here vs 30/29 in nepali-date-converter',
-};
+const KNOWN_DISAGREEMENTS: Readonly<Record<number, string>> = {};
 
 interface Parts {
   year: number;
