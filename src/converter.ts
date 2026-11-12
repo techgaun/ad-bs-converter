@@ -1,8 +1,11 @@
-import getNepaliNumber from 'get-nepali-number';
-import getNepDayOfWeek from 'get-nepday-of-week';
+import { getNepaliNumber } from 'get-nepali-number';
+import { getNepdayOfWeek } from 'get-nepday-of-week';
 
 import { CALENDAR_DATA, MAX_BS_YEAR, MIN_BS_YEAR, type YearData } from './data';
 import type { AdDate, AdDateInput, BsDate, BsDateInput, DateParts, SupportedRange } from './types';
+
+/** Devanagari digits without Lakh/Crore separators, so a year renders as `२०८३` rather than `२,०८३`. */
+const toNeDigits = (value: number): string => getNepaliNumber(value, { grouping: false });
 
 // ---------------------------------------------------------------------------
 // Static names
@@ -344,21 +347,21 @@ export function ad2bs(input: AdDateInput): BsDate {
   const bs = ordinalToBs(dayNumber - TABLE_START_DAY_NUMBER);
   const dayOfWeek = dayNumberToAd(dayNumber).dayOfWeek;
   const totalDaysInMonth = yearRow(bs.year)[bs.month - 1] ?? 0;
-  const neDay = getNepDayOfWeek(dayOfWeek);
-  const enDay = getNepDayOfWeek(dayOfWeek, { lang: 'en' });
+  const neDay = getNepdayOfWeek(dayOfWeek);
+  const enDay = getNepdayOfWeek(dayOfWeek, { lang: 'en' });
 
   return {
     ne: {
-      year: getNepaliNumber(bs.year),
-      month: getNepaliNumber(bs.month),
-      day: getNepaliNumber(bs.day),
+      year: toNeDigits(bs.year),
+      month: toNeDigits(bs.month),
+      day: toNeDigits(bs.day),
       strMonth: NE_MONTHS[bs.month - 1] ?? '',
       strShortMonth: NE_MONTHS_SHORT[bs.month - 1] ?? '',
-      dayOfWeek: getNepaliNumber(dayOfWeek),
+      dayOfWeek: toNeDigits(dayOfWeek),
       strDayOfWeek: neDay.full,
       strShortDayOfWeek: neDay.short,
       strMinDayOfWeek: neDay.min,
-      totalDaysInMonth: getNepaliNumber(totalDaysInMonth),
+      totalDaysInMonth: toNeDigits(totalDaysInMonth),
     },
     en: {
       year: bs.year,
