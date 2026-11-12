@@ -29,3 +29,6 @@ node_modules
 *.xml
 .idea
 generate.js
+
+# Build output
+dist

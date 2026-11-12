@@ -1,11 +1,40 @@
 {
   "name": "ad-bs-converter",
   "version": "0.5.0",
-  "description": "A javascript implementation to convert bikram samvat to anno domini and vice-versa",
-  "main": "src/converter.js",
+  "description": "Convert Bikram Sambat (BS) dates to Anno Domini (AD) and vice-versa. TypeScript, ESM and CommonJS.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "test": "mocha test --recursive",
-    "cover": "istanbul cover --report html node_modules/.bin/_mocha -- -R spec test/**/*.js"
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "smoke": "node scripts/smoke.cjs && node scripts/smoke.mjs",
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -13,12 +42,15 @@
   },
   "keywords": [
     "bikram samvat",
+    "bikram sambat",
     "nepali-to-english",
     "english-to-nepali",
     "nepali date converter",
     "ad-bs",
+    "bs-ad",
     "nepali to english date",
-    "english to nepali date"
+    "english to nepali date",
+    "typescript"
   ],
   "author": "techgaun",
   "license": "ISC",
@@ -26,12 +58,21 @@
     "url": "https://github.com/techgaun/ad-bs-converter/issues"
   },
   "homepage": "https://github.com/techgaun/ad-bs-converter#readme",
-  "devDependencies": {
-    "chai": "^3.1.0",
-    "mocha": "^2.2.5"
-  },
   "dependencies": {
     "get-nepali-number": "^0.1.0",
     "get-nepday-of-week": "^0.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^18.19.130",
+    "eslint": "^9.39.5",
+    "globals": "^17.14.0",
+    "nepali-date-converter": "^3.4.2",
+    "prettier": "^3.10.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.2",
+    "vite": "^6.4.6",
+    "vitest": "^3.2.7"
   }
 }
