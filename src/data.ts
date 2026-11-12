@@ -1,131 +1,47 @@
-"use strict";
+/**
+ * Bikram Sambat calendar table.
+ *
+ * Each row is keyed by BS year and holds the number of days in each of the
+ * twelve months (Baisakh to Chaitra) followed by the total number of days in
+ * that year.
+ *
+ * Data provenance:
+ * - 1975-2092: original table shipped with this package (npm 0.5.0).
+ *   - 2082 and 2083 were corrected in 0.6.0: they were provisional
+ *     predictions when first added in 2017.
+ *   - 2081 was corrected by PR #11 (2024). The same PR also rewrote 2004,
+ *     2062 and 2087 to values that match no reference library; 0.6.0
+ *     restores the 0.5.0 rows, which agree with nepali-date-converter and
+ *     @remotemerge/nepali-date-converter.
+ * - 2093-2100: https://nepalipatro.com.np/calendar/monthly/bs/2093/1
+ * - 2101-2199: community contribution (PR #11, see git history).
+ *
+ * Years after 2090 BS have not been officially published by the Nepal
+ * Panchanga Nirnayak Samiti and are therefore provisional; they may change.
+ *
+ * The module keeps the table in a separate file so that updating it is a
+ * one-line change per year. `test/data.test.ts` verifies that every row is
+ * internally consistent (month lengths sum to the yearly total).
+ */
 
-var getNepaliNumber = require("get-nepali-number");
-var getNepDayOfWeek = require("get-nepday-of-week");
-var defaults = {
-    lang: "ne", //possible values: ne for nepali text, en for english text
-    //dateFormat: 'yyyy/mm/dd',     // not implemented yet
-    monthFormat: "full", //possible values: full for full name, short for short name
-    daysFormat: "min", //possible values: full for full name, short for short name and min for minified name
-  },
-  ne = {
-    monthsName: [
-      "बैशाख",
-      "जेष्ठ",
-      "आषाढ",
-      "श्रावण",
-      "भाद्र",
-      "आश्विन",
-      "कार्तिक",
-      "मंसिर",
-      "पौष",
-      "माघ",
-      "फाल्गुन",
-      "चैत्र",
-    ],
-    monthsShortName: [
-      "बै",
-      "जे",
-      "आषा",
-      "श्रा",
-      "भा",
-      "आश",
-      "का",
-      "मं",
-      "पौ",
-      "मा",
-      "फा",
-      "चै",
-    ],
-  },
-  en = {
-    monthsName: [
-      "Baisakh",
-      "Jestha",
-      "Ashadh",
-      "Shrawan",
-      "Bhadra",
-      "Ashwin",
-      "Kartik",
-      "Mangsir",
-      "Paush",
-      "Mangh",
-      "Falgun",
-      "Chaitra",
-    ],
-    monthsShortName: [
-      "Bai",
-      "Je",
-      "As",
-      "Shra",
-      "Bha",
-      "Ash",
-      "Kar",
-      "Mang",
-      "Pau",
-      "Ma",
-      "Fal",
-      "Chai",
-    ],
-  },
-  engDaysName = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ],
-  engDaysShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  engMonthsName = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ],
-  engMonthsShortName = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ],
-  daysInYear = 365,
-  minMonth = 1,
-  minDays = 1,
-  maxMonth = 12,
-  maxDays = 32,
-  nums = {
-    0: "०",
-    1: "१",
-    2: "२",
-    3: "३",
-    4: "४",
-    5: "५",
-    6: "६",
-    7: "७",
-    8: "८",
-    9: "९",
-  },
-  base_ad = { year: 2017, month: 2, day: 11, dayOfWeek: 6 }, // dayOfWeek: 0 for sunday, 1 for monday and so on
-  base_bs = { year: 2073, month: 10, day: 29, dayOfWeek: 6 },
-  calendar_data = {
+/** Twelve month lengths followed by the total number of days in the year. */
+export type YearData = readonly [
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+];
+
+export const CALENDAR_DATA: Readonly<Record<number, YearData>> = {
   1975: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   1976: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
   1977: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31, 365],
@@ -155,7 +71,7 @@ var defaults = {
   2001: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2002: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2003: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
-  2004: [30, 32, 31, 32, 31, 30, 30, 30, 30, 29, 29, 31, 365],
+  2004: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31, 365],
   2005: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2006: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2007: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
@@ -213,7 +129,7 @@ var defaults = {
   2059: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2060: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2061: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
-  2062: [31, 31, 31, 32, 31, 31, 29, 30, 29, 30, 29, 31, 365],
+  2062: [30, 32, 31, 32, 31, 31, 29, 30, 29, 30, 29, 31, 365],
   2063: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2064: [31, 31, 32, 32, 31, 30, 30, 29, 30, 29, 30, 30, 365],
   2065: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
@@ -233,12 +149,12 @@ var defaults = {
   2079: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2080: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 30, 365],
   2081: [31, 32, 31, 32, 31, 30, 30, 30, 29, 30, 29, 31, 366],
-  2082: [31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30, 365],
-  2083: [31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30, 365],
+  2082: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
+  2083: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2084: [31, 31, 32, 31, 31, 30, 30, 30, 29, 30, 30, 30, 365],
   2085: [31, 32, 31, 32, 30, 31, 30, 30, 29, 30, 30, 30, 366],
   2086: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30, 365],
-  2087: [31, 31, 32, 31, 31, 31, 30, 29, 30, 30, 30, 30, 366],
+  2087: [31, 31, 32, 31, 31, 31, 30, 30, 29, 30, 30, 30, 366],
   2088: [30, 31, 32, 32, 30, 31, 30, 30, 29, 30, 30, 30, 365],
   2089: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30, 365],
   2090: [30, 32, 31, 32, 31, 30, 30, 30, 29, 30, 30, 30, 365],
@@ -351,183 +267,9 @@ var defaults = {
   2197: [31, 31, 32, 31, 31, 31, 30, 29, 30, 29, 30, 30, 365],
   2198: [31, 32, 31, 32, 31, 30, 30, 30, 29, 29, 30, 31, 366],
   2199: [31, 31, 32, 31, 32, 30, 30, 29, 30, 29, 30, 30, 365],
-  };
+};
 
-/*
- 2093 to 2100's data is from https://nepalipatro.com.np/calendar/monthly/bs/2093/1
- */
-
-function countDaysInYear(year) {
-  if (typeof calendar_data[year] === "undefined") {
-    return daysInYear;
-  }
-
-  return calendar_data[year][12];
-}
-
-function isLeapYear(year) {
-  return daysInYear !== countDaysInYear(year);
-}
-
-function countBSDays(date) {
-  var dayCount = 0;
-  var dateArr = date.split("/").map(function (str) {
-    return Number(str);
-  });
-
-  var dateObj = { year: dateArr[0], month: dateArr[1], day: dateArr[2] };
-
-  var inc = false;
-  if (dateArr[0] > base_bs.year) {
-    inc = true;
-  } else if (dateArr[0] === base_bs.year && dateArr[1] > base_bs.month) {
-    inc = true;
-  } else if (
-    dateArr[0] === base_bs.year &&
-    dateArr[1] === base_bs.month &&
-    dateArr[2] > base_bs.day
-  ) {
-    inc = true;
-  }
-
-  var start = {};
-  var end = {};
-  var factor = 1;
-
-  if (inc === true) {
-    start = base_bs;
-    end = dateObj;
-  } else {
-    start = dateObj;
-    end = base_bs;
-    factor = -1;
-  }
-
-  for (var i = start.year; i <= end.year; i++) {
-    dayCount += calendar_data[i][12];
-  }
-
-  for (var i = 0; i < start.month - 1; i++) {
-    dayCount -= calendar_data[start.year][i];
-  }
-
-  //dayCount += calendar_data[start.year][12 - 1];
-
-  for (var i = end.month - 1; i < 12; i++) {
-    dayCount -= calendar_data[end.year][i];
-  }
-
-  dayCount -= start.day;
-  dayCount += end.day;
-  return dayCount * factor;
-}
-
-function countADDays(date) {
-  var dayCount = 0,
-    i = 0;
-  var dateArr = date.split("/").map(function (str) {
-    return Number(str);
-  });
-
-  var dateObj = { year: dateArr[0], month: dateArr[1] - 1, day: dateArr[2] };
-
-  var date1 = new Date(base_ad.year, base_ad.month - 1, base_ad.day);
-  var date2 = new Date(dateObj.year, dateObj.month, dateObj.day);
-  var timeDiff = date2.getTime() - date1.getTime();
-  var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  return { diffDays: diffDays, dateInAd: date2 };
-}
-
-function offsetBSDays(dayData) {
-  var dayCount = dayData.diffDays,
-    dateInAd = dayData.dateInAd;
-  var bs_date = JSON.parse(JSON.stringify(base_bs));
-  if (dayCount >= 0) {
-    bs_date.day += dayCount;
-    while (bs_date.day > calendar_data[bs_date.year][bs_date.month - 1]) {
-      bs_date.day -= calendar_data[bs_date.year][bs_date.month - 1];
-      bs_date.month++;
-      if (bs_date.month > 12) {
-        bs_date.year++;
-        bs_date.month = 1;
-      }
-    }
-  } else {
-    dayCount = Math.abs(dayCount);
-    while (dayCount >= 0) {
-      if (dayCount < calendar_data[bs_date.year][bs_date.month - 1]) {
-        dayCount = calendar_data[bs_date.year][bs_date.month - 1] - dayCount;
-        break;
-      }
-      dayCount -= calendar_data[bs_date.year][bs_date.month - 1];
-      bs_date.month--;
-      if (bs_date.month === 0) {
-        bs_date.year--;
-        bs_date.month = 12;
-      }
-    }
-    bs_date.day = dayCount;
-  }
-  var month = dateInAd.getMonth(),
-    dayOfWeek = dateInAd.getDay();
-  var npDayOfWeek = getNepDayOfWeek(dayOfWeek),
-    enDayOfWeek = getNepDayOfWeek(dayOfWeek, { lang: "en" });
-
-  var totalDays = calendar_data[bs_date.year][bs_date.month - 1];
-  var dateObj = {
-    ne: {
-      year: getNepaliNumber(bs_date.year),
-      month: getNepaliNumber(bs_date.month),
-      day: getNepaliNumber(bs_date.day),
-      strMonth: ne.monthsName[bs_date.month - 1],
-      strShortMonth: ne.monthsShortName[bs_date.month - 1],
-      dayOfWeek: getNepaliNumber(dayOfWeek),
-      strDayOfWeek: npDayOfWeek["full"],
-      strShortDayOfWeek: npDayOfWeek["short"],
-      strMinDayOfWeek: npDayOfWeek["min"],
-      totalDaysInMonth: getNepaliNumber(totalDays),
-    },
-    en: {
-      year: bs_date.year,
-      month: bs_date.month,
-      day: bs_date.day,
-      strMonth: en.monthsName[bs_date.month - 1],
-      strShortMonth: en.monthsShortName[bs_date.month - 1],
-      dayOfWeek: dayOfWeek,
-      strDayOfWeek: enDayOfWeek["full"],
-      strShortDayOfWeek: enDayOfWeek["short"],
-      strMinDayOfWeek: enDayOfWeek["min"],
-      totalDaysInMonth: totalDays,
-    },
-  };
-  return dateObj;
-}
-
-function offsetADDays(dayCount) {
-  var date = new Date(base_ad.year, base_ad.month - 1, base_ad.day);
-  date.setDate(date.getDate() + dayCount);
-  var month = date.getMonth(),
-    dayOfWeek = date.getDay();
-  var dateObj = {
-    year: date.getFullYear(),
-    month: month + 1,
-    strMonth: engMonthsName[month],
-    strShortMonth: engMonthsShortName[month],
-    day: date.getDate(),
-    dayOfWeek: dayOfWeek,
-    strDayOfWeek: engDaysName[dayOfWeek],
-    strShortDayOfWeek: engDaysShortName[dayOfWeek],
-  };
-  return dateObj;
-}
-
-function bs2ad(date) {
-  return offsetADDays(countBSDays(date));
-}
-
-function ad2bs(date) {
-  return offsetBSDays(countADDays(date));
-}
-
-exports.bs2ad = bs2ad;
-exports.ad2bs = ad2bs;
+/** First BS year present in the table. */
+export const MIN_BS_YEAR = 1975;
+/** Last BS year present in the table. */
+export const MAX_BS_YEAR = 2199;
